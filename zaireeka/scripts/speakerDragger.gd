@@ -53,7 +53,7 @@ func _process(delta):
 		if justnow_mouseDown: # start click: hold a speaker (if pointed at one).
 			if hitObject.get_meta("object_type") == "Speaker" and not heldSpeaker:
 				heldSpeaker = hitObject
-				heldSpeaker.reparent(speakerSystem)
+				workaround_reparent(heldSpeaker, speakerSystem) # heldSpeaker.reparent(speakerSystem)
 				setCollision(heldSpeaker, false)
 			elif hitObject.get_meta("object_type") == "JointArea" and not heldSet:
 				heldSet = hitObject.get_parent().get_parent() # ugly af wtf. only in roblox
@@ -73,27 +73,32 @@ func _process(delta):
 				if hitObject.name == "jointArea": # click into place preview+let-go.
 					var speakerSpot = hitObject.get_parent().get_node("speakerSpot") 
 					if speakerSpot and speakerSpot.get_child_count() == 0:
-						heldSpeaker.reparent(speakerSpot)
+						workaround_reparent(heldSpeaker, speakerSpot) #heldSpeaker.reparent(speakerSpot)
+						
 					if heldSpeaker.get_parent().name == "speakerSpot": # if docked
 						heldSpeaker.position = Vector3(0,0,0)
 						heldSpeaker.rotation = Vector3(0,0,0)
 				else: # if dragging + pointed away from dock, un-parent
 					if heldSpeaker.get_parent() != speakerSystem:
-						# weird godot bug: when reparenting, it plays the audio
-						var wasPlaying = heldSpeaker.get_node("music").playing
-						
-						#print(heldSpeaker.get_node("music").get_playback_position())
-						heldSpeaker.reparent(speakerSystem)
-						#print(heldSpeaker.get_node("music").get_playback_position())
-						
-						
-						heldSpeaker.get_node("music").playing = wasPlaying
-						
+						workaround_reparent(heldSpeaker, speakerSystem) # heldSpeaker.reparent(speakerSystem)
 						
 			else: # mouse release: plant the speaker
 				setCollision(heldSpeaker, true)
 				heldSpeaker = null
-		
+
+# upon reparent(), godot unpauses audio. no goddamn clue why. took me a bit to figure this one out
+func workaround_reparent(speaker, newParent):
+	var player : AudioStreamPlayer3D = speaker.get_node("music")
+	#var playing := player.playing
+	var paused := player.stream_paused
+	#var time := player.get_playback_position()
+	speaker.reparent(newParent)
+	#player.seek(time)
+	#player.playing = playing
+	player.stream_paused = paused
+	#speakerSystem.masterControl("seek", speakerSystem.mainTrack.get_playback_position()) # test.
+	
+
 func _unhandled_input(event):
 	#print(event)
 	pass
