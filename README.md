@@ -2,8 +2,10 @@
 A way to play The Flaming Lips' Zaireeka (an album that requires 4 CD players).
 
 Obviously not a replacement for the intended method, but a nice-to-have "emulator" for those interested.
+![Screenshot](screenshot.png)
 
-[A link to a version somebody did in Unity 5 years ago, with its more developed sound engine](https://github.com/schippas/Zaireeka3D)
+
+[5 years ago, somebody made a version in Unity. This one currently has time offsets and reverb.](https://github.com/schippas/Zaireeka3D)
 
 ## Downloads (v0.1)
 Since the project requires copyrighted music, you have to edit and add the tracks in yourself. 
