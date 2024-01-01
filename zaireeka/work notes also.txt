@@ -1,0 +1,153 @@
+things I would like to do/fix in the future:
+	- actually get the metadata off of the WAV files themselves, not a separate JSON
+	- write an algo to separate the L/R channels from a single audio file.
+	- allow optional use of MP3 or OGG files instead (may interfere wtih point 2)
+	- fix issue where you can drag speakers even when mouse is over the UI
+	- save/load configs
+		- preset speaker configs
+
+hypothetical things to also do:
+	- multiplayer (ideally P2P cuz this is simple, but server-based makes sense)
+	- EQ option for all and individual speakers
+	- reverb option for all and individual speakers
+	- mobile support
+	- time offset for each CD
+		- even cooler: for EACH speaker (L and R)
+			- zak: "give a milliseconds range. gives a cool soundstage effect"
+	- visualiser for the background
+
+
+var speakers = (speakers node found in workspace)
+
+function createSpeakerControls()
+	-- remove last set of speakers UIs
+	for i = 1, speakerUI:GetChildren() do
+		if name is not "titles" then
+			speakerUI[i] rmeove
+	
+	-- add in new speaker UIs, use a separate function to connect each of them
+	for i in (speaker.size()) do
+		## hmmmm how will it get the info for name, size, etc, etc
+	
+	# try and display the information (like the speakerSettings crap) somewhere in the export?
+	if there is a nice way of doing it, it's worth it. metadata?
+	000000000H Ch1ld: Add Metadata > Dictionary. set speakerSettings in here. gotta REAAALLLY use htis now.
+	hell, can you export THAT? would be HELLA handy actually.
+	that's ognna be way more important than I thought
+
+	-- connect via signals
+
+SpeakerSystem (most important):
+	X- create visual numbering for the speakers.
+	- make incredibly basic start/pause functionality that does it for all speakers.
+	- create a set of functions which is what enables the dev & GUI to it to interact with the system
+		- these funcs are then connected to signals
+		(cuz u can't connect a changed event to a variable. unless you do a long af check-every-frame)
+		- or maybe just bite the bullet, and make the GUI THE only way to interact with it?
+			- works with the use of functions and stuff.
+		
+XIMPORTANT NOTE: node names CHANGE. Use METADATA to save and compare things like e.g. if object.name == "speaker": do thjis
+
+
+old code attempt in splitting the audio channels of a stereo WAV file. f it, i did it the reluctant way.
+bright side: it's fast af in loading. dark side: massive file size.
+Y TF CANT G0D0T have a G0D4M pan audio feature?!?! ik it's absolutely useless to the vast majority of people but CAM0N
+		
+		# setting the song: turn this into its own function, where you choose to make it mono.
+		#var file = FileAccess.open(newSetting[SETTING.SONG], FileAccess.READ)
+		#var sound = AudioStreamWAV.new() # was mp3
+		#sound.data = file.get_buffer(file.get_length())
+		
+		# the above was the original sound loading code. worked fine for mp3, but messed up on wav.
+		# load() suddenly fixed that, but it's worth looking into once this is all done, to see if
+		# channel separation within gdscript is totally possible. it WILL DEFINITELY be slow.
+		
+		# https://godotforums.org/d/38247-how-to-play-just-one-channel-of-an-audiostreamplayer3d
+		# hmmmm use below to figure out how to get the second half of the audio?
+		# https://godotforums.org/d/22308-convert-stereo-audio-data-to-mono
+		
+		# the whole format thing is for wav files. maybe this can be done with mp3 without format?
+		# good lord this is incredibly slow. best bet is to srsly just make l/r channels of this goddamn thing.
+		# but then again, do it once on song load (NOT FOR EACH SPEAKER), and youre set. still sl0 th0
+		#var stream = sound
+		#var old_data = stream.get_data()
+		#var new_data = range(old_data.size() / 2)
+		#print(stream.format)
+		#if stream.format == stream.FORMAT_16_BITS:
+			#for ii in new_data.size() / 2:
+				#new_data[ii * 2] = (old_data[ii * 4] + old_data[ii * 4 + 2]) / 2.0
+				#new_data[ii * 2+1] = (old_data[ii * 4 + 1] + old_data[ii * 4 + 3])/2.0
+		#else:
+			#print("aighiag")
+			#for ii in new_data.size():
+				##new_data[ii] = (old_data[ii * 2] + old_data[ii * 2 + 1]) / 2.0
+				#new_data[ii] = (old_data[ii * 2] + old_data[ii * 2 + 1]) / 2.0
+		#stream.data = new_data
+		#stream.stereo = false
+		# wait the audio aint even playing correctly wtf
+
+# whoops. this is for every song. let's hold onto this but redo it for each track.
+	#for trackNo in range(1, totalTracks+1):
+		#var newSetting = defaultSetting.duplicate()
+		#for discNo in range(1, totalDiscs+1):
+			#print("track/disc: " + str(trackNo) + "/" + str(discNo))
+			#newSetting[SETTING.LEFT_SONG] = songPath + str(trackNo) + "/" + str(discNo) + "L.wav"
+			#newSetting[SETTING.RIGHT_SONG] = songPath + str(trackNo) + "/" + str(discNo) + "R.wav"
+		#sets[trackNo+1] = newSetting
+		
+		
+		# could make adapt to no. of songs, but im alr doin this in an unpreferable way atm.
+	# so ima just make it hardcoded, but easily editable.
+	#var totalTracks := 8 # could scan the no. of folders. but i'd like it just to be tracks. ;-;
+	#var totalDiscs := 4 # ideal world: 4 disc folders
+	#var songPath = audioPath + "zaireeka/"
+	#var trackNo = 1
+	#
+	#for discNo in range(1, totalDiscs+1):
+		##print("track/disc: " + str(trackNo) + "/" + str(discNo))
+		#var newSetting = defaultSetting.duplicate()
+		#newSetting[SETTING.LEFT_SONG] = songPath + str(trackNo) + "/" + str(discNo) + "L.wav"
+		#newSetting[SETTING.RIGHT_SONG] = songPath + str(trackNo) + "/" + str(discNo) + "R.wav"
+		#sets[discNo] = newSetting
+	#
+	#print(sets)
+	#var sets = {1: testSetting, 2: testSetting, 3: testSetting, 4: testSetting}
+	#var sets = {1:testSetting}
+	
+	
+		# with the track list now set, we then do the speaker.
+	#var defaultSetting = {
+		#SETTING.LEFT_VOLUME: 80, 
+		#SETTING.RIGHT_VOLUME: 80,
+	#}
+	#var sets = {} 
+	#
+	#for i in range(1, totalDiscs+1):# just make number of speakers how much u need.
+		#sets[i] = defaultSetting
+
+#if action == "play/pause":
+		#playing = not playing
+		#for i in allSettings:
+			#allSettings[i][SETTING.LEFT_SPEAKER].get_node("music").playing = playing
+			#allSettings[i][SETTING.RIGHT_SPEAKER].get_node("music").playing = playing
+		## iterate through all the speakerSettings and pause them. also set the setting too?
+		## also set the export variable of stop to be on. hell evne use that to play/pause
+	#elif action == "fast forward ON":
+		#for i in allSettings:
+			#allSettings[i][SETTING.LEFT_SPEAKER].get_node("music").pitch_scale = 3
+			#allSettings[i][SETTING.RIGHT_SPEAKER].get_node("music").pitch_scale = 3
+	#elif action == "fast forward OFF":
+		#for i in allSettings:
+			#allSettings[i][SETTING.LEFT_SPEAKER].get_node("music").pitch_scale = 1
+			#allSettings[i][SETTING.RIGHT_SPEAKER].get_node("music").pitch_scale = 1
+	#elif action == "rewind ON":
+		#rewinding = true
+		#while rewinding:
+			#for i in allSettings:
+				## make a MAIN SONG variable that all the speakers follow the settings off
+				#var seek = allSettings[i][SETTING.LEFT_SPEAKER].get_node("music").get_playback_position() - 3
+				#allSettings[i][SETTING.LEFT_SPEAKER].get_node("music").seek(seek)
+				#allSettings[i][SETTING.RIGHT_SPEAKER].get_node("music").seek(seek)
+			#await get_tree().create_timer(0.5).timeout
+	#elif action == "rewind OFF":
+		#rewinding = false

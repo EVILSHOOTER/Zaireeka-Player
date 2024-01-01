@@ -1,0 +1,6 @@
+res://default_bus_layout.tres
+res://scenes/zaireeka.tscn
+res://UI/speakerUI.tscn
+res://objects/SpeakerSet.tscn
+res://scripts/speakerDragger.gd
+res://objects/Speaker.tscn

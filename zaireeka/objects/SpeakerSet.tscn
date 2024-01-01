@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct2p2svofwjwv"]
+
+[ext_resource type="PackedScene" uid="uid://c8fiu7avmpgub" path="res://objects/Speaker.tscn" id="1_isj87"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uot67"]
+size = Vector3(1.25, 0.1, 2.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46kim"]
+albedo_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t6b3k"]
+material = SubResource("StandardMaterial3D_46kim")
+size = Vector3(1.25, 0.1, 2.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kxlb8"]
+size = Vector3(1.5, 0.2, 1.5)
+
+[node name="SpeakerSet" type="Node3D"]
+metadata/object_type = "SpeakerSet"
+
+[node name="base" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base"]
+shape = SubResource("BoxShape3D_uot67")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="base"]
+mesh = SubResource("BoxMesh_t6b3k")
+
+[node name="leftJoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.75)
+
+[node name="jointArea" type="Area3D" parent="leftJoint"]
+metadata/object_type = "JointArea"
+metadata/used = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="leftJoint/jointArea"]
+shape = SubResource("BoxShape3D_kxlb8")
+
+[node name="speakerSpot" type="Node3D" parent="leftJoint"]
+
+[node name="Speaker" parent="leftJoint/speakerSpot" instance=ExtResource("1_isj87")]
+
+[node name="side" type="Label3D" parent="leftJoint/speakerSpot/Speaker"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0.5, 1.75, 0)
+text = "L"
+
+[node name="numberFront" type="Label3D" parent="leftJoint/speakerSpot/Speaker"]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 0.505, 1.37, 0.4)
+text = "1"
+
+[node name="numberBack" type="Label3D" parent="leftJoint/speakerSpot/Speaker"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -0.505, 0.75, 0)
+text = "1"
+
+[node name="rightJoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.75)
+
+[node name="jointArea" type="Area3D" parent="rightJoint"]
+metadata/object_type = "JointArea"
+metadata/used = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rightJoint/jointArea"]
+shape = SubResource("BoxShape3D_kxlb8")
+
+[node name="speakerSpot" type="Node3D" parent="rightJoint"]
+
+[node name="Speaker" parent="rightJoint/speakerSpot" instance=ExtResource("1_isj87")]
+
+[node name="side" type="Label3D" parent="rightJoint/speakerSpot/Speaker"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0.5, 1.75, 0)
+text = "R"
+
+[node name="numberFront" type="Label3D" parent="rightJoint/speakerSpot/Speaker"]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 0.505, 1.37, 0.4)
+text = "1"
+
+[node name="numberBack" type="Label3D" parent="rightJoint/speakerSpot/Speaker"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -0.505, 0.75, 0)
+text = "1"

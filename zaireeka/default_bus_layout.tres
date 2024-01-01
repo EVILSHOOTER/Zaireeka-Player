@@ -1,0 +1,57 @@
+[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://c34vylgek05nt"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_2t7xr"]
+resource_name = "Reverb"
+room_size = 1.0
+dry = 0.0
+wet = 1.0
+
+[sub_resource type="AudioEffectPanner" id="AudioEffectPanner_37o6x"]
+resource_name = "Panner"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_vq26o"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_xdl7i"]
+resource_name = "SpectrumAnalyzer"
+
+[sub_resource type="AudioEffectEQ21" id="AudioEffectEQ21_c7bpk"]
+resource_name = "EQ21"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_sau03"]
+resource_name = "Distortion"
+
+[sub_resource type="AudioEffectBandLimitFilter" id="AudioEffectBandLimitFilter_1tafs"]
+resource_name = "BandLimitFilter"
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_dpkbi"]
+resource_name = "Filter"
+
+[sub_resource type="AudioEffectCapture" id="AudioEffectCapture_ovik1"]
+resource_name = "Capture"
+
+[resource]
+bus/1/name = &"pan test"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_2t7xr")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectPanner_37o6x")
+bus/1/effect/1/enabled = false
+bus/1/effect/2/effect = SubResource("AudioEffectStereoEnhance_vq26o")
+bus/1/effect/2/enabled = false
+bus/1/effect/3/effect = SubResource("AudioEffectSpectrumAnalyzer_xdl7i")
+bus/1/effect/3/enabled = false
+bus/1/effect/4/effect = SubResource("AudioEffectEQ21_c7bpk")
+bus/1/effect/4/enabled = false
+bus/1/effect/5/effect = SubResource("AudioEffectDistortion_sau03")
+bus/1/effect/5/enabled = false
+bus/1/effect/6/effect = SubResource("AudioEffectBandLimitFilter_1tafs")
+bus/1/effect/6/enabled = false
+bus/1/effect/7/effect = SubResource("AudioEffectFilter_dpkbi")
+bus/1/effect/7/enabled = false
+bus/1/effect/8/effect = SubResource("AudioEffectCapture_ovik1")
+bus/1/effect/8/enabled = false

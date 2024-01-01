@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8fiu7avmpgub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkt2t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvf4k"]
+albedo_color = Color(0.584314, 0.584314, 0.584314, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e17kf"]
+material = SubResource("StandardMaterial3D_hvf4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y47qf"]
+albedo_color = Color(0.188235, 0.188235, 0.188235, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cv503"]
+material = SubResource("StandardMaterial3D_y47qf")
+
+[node name="Speaker" type="StaticBody3D"]
+metadata/object_type = "Speaker"
+
+[node name="col_body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_dkt2t")
+
+[node name="mesh_body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("BoxMesh_e17kf")
+
+[node name="mesh_woofer" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, -0.05, 0, 0.5, -2.18557e-09, 0, 0, 0, 0.5, 0.5, 1.15, 0)
+mesh = SubResource("CylinderMesh_cv503")
+
+[node name="mesh_woofer2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.49691e-08, -0.05, 0, 0.8, -2.18557e-09, 0, 0, 0, 0.8, 0.5, 0.45, 0)
+mesh = SubResource("CylinderMesh_cv503")

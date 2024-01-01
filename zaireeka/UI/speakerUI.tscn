@@ -1,0 +1,396 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyv0g6vd0q5pi"]
+
+[ext_resource type="Script" path="res://scripts/speakerUI.gd" id="1_hsch3"]
+[ext_resource type="Texture2D" uid="uid://d2vy3qe4jjxpu" path="res://pictures/UIbuttons/audioOff.png" id="2_adsfn"]
+[ext_resource type="Texture2D" uid="uid://boj2vlq8bfwth" path="res://pictures/UIbuttons/audioOn.png" id="3_qoyit"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mcfpc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0tk36"]
+
+[node name="SpeakerUi" type="CanvasLayer" node_paths=PackedStringArray("infoButton", "discUI", "speakersUIContainer", "button_backward", "button_backward2", "button_play", "button_forward", "button_forward2", "button_shuffle", "button_repeat", "timeline", "masterVolume", "currentTime", "endTime", "songDetails")]
+script = ExtResource("1_hsch3")
+infoButton = NodePath("Control1/infoLabel/Button")
+discUI = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI")
+speakersUIContainer = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers")
+button_backward = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/backward")
+button_backward2 = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/backward2")
+button_play = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/play")
+button_forward = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/forward")
+button_forward2 = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/forward2")
+button_shuffle = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/shuffle")
+button_repeat = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/repeat")
+timeline = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline/HSlider")
+masterVolume = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/volume/HSlider")
+currentTime = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline/start")
+endTime = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline/end")
+songDetails = NodePath("Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/songDetails")
+
+[node name="Control1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control1/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control1/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="wholeGUI" type="VBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="speakers" type="VBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI"]
+layout_mode = 2
+
+[node name="titles" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers"]
+layout_mode = 2
+
+[node name="disc" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "DISC"
+horizontal_alignment = 1
+
+[node name="leftVol" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VOLUME (L)"
+horizontal_alignment = 1
+
+[node name="rightVol" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VOLUME (R)"
+horizontal_alignment = 1
+
+[node name="eq" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/titles"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "EQ"
+horizontal_alignment = 1
+
+[node name="discUI" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "#1"
+horizontal_alignment = 1
+
+[node name="volume" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lowvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume"]
+layout_mode = 2
+texture = ExtResource("2_adsfn")
+expand_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="highvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume"]
+layout_mode = 2
+texture = ExtResource("3_qoyit")
+expand_mode = 2
+
+[node name="volume2" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lowvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume2"]
+layout_mode = 2
+texture = ExtResource("2_adsfn")
+expand_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="highvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI/volume2"]
+layout_mode = 2
+texture = ExtResource("3_qoyit")
+expand_mode = 2
+
+[node name="eq" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/speakers/discUI"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "EDIT"
+
+[node name="player" type="VBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI"]
+layout_mode = 2
+
+[node name="songDetails" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]A Machine in India
+[b]The Flaming Lips[/b] - [i]Zaireeka[/i][/center]"
+fit_content = true
+
+[node name="timeline" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player"]
+layout_mode = 2
+
+[node name="start" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline"]
+layout_mode = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_mcfpc")
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 0.0
+
+[node name="end" type="Label" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/timeline"]
+layout_mode = 2
+text = "04:39"
+label_settings = SubResource("LabelSettings_mcfpc")
+vertical_alignment = 1
+
+[node name="mainControls" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player"]
+layout_mode = 2
+
+[node name="backward2" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Previous Song"
+text = " "
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/backward2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][img=30]pictures/UIbuttons/previous.png[/img][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="backward" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Rewind"
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/backward"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][img=30]pictures/UIbuttons/rewind.png[/img][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="play" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Play / Pause"
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/play"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][img=30]pictures/UIbuttons/forward.png[/img]/[img=30]pictures/UIbuttons/pause.png[/img][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="forward" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Fast Forward"
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/forward"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][img=30]pictures/UIbuttons/fastForward.png[/img][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="forward2" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Next Song"
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/mainControls/forward2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][img=30]pictures/UIbuttons/next.png[/img][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="extraControls" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player"]
+layout_mode = 2
+
+[node name="shuffle" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Shuffle Album"
+text = " "
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/shuffle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[img=30]pictures/UIbuttons/open.png[/img] (shuffle)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="tick" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/shuffle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[right] [img=30]pictures/UIbuttons/checkmark.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="repeat" type="Button" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Repeat Track"
+text = " "
+
+[node name="contents" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/repeat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[img=30]pictures/UIbuttons/return.png[/img] (repeat)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="tick" type="RichTextLabel" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/repeat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[right] [img=30]pictures/UIbuttons/checkmark.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="volume" type="HBoxContainer" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Master Volume"
+
+[node name="lowvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/volume"]
+layout_mode = 2
+texture = ExtResource("2_adsfn")
+expand_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="highvol" type="TextureRect" parent="Control1/MarginContainer/AspectRatioContainer/PanelContainer/MarginContainer/wholeGUI/player/extraControls/volume"]
+layout_mode = 2
+texture = ExtResource("3_qoyit")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control1/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[right][outline_size=10][outline_color=#222] Lock/unlock Mouse: [img=40]pictures/E_Key_Dark.png[/img] 
+Movement: [img=40]pictures/W_Key_Dark.png[/img][img=40]pictures/A_Key_Dark.png[/img][img=40]pictures/S_Key_Dark.png[/img][img=40]pictures/D_Key_Dark.png[/img] [img=60]pictures/Space_Key_Dark.png[/img]
+Hold [img=40]pictures/Mouse_Left_Key_Dark.png[/img] on speakers to drag them. Hold [img=40]pictures/R_Key_Dark.png[/img] to rotate them.
+"
+
+[node name="infoLabel" type="Label" parent="Control1"]
+layout_mode = 1
+offset_right = 168.0
+offset_bottom = 23.0
+text = " zaireeka player (v0.1)"
+
+[node name="Button" type="Button" parent="Control1/infoLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0tk36")
