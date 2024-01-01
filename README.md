@@ -31,6 +31,7 @@ This should open the project.
 
 ## Features to add
 ### Bugs/changes I'd like to make
+- the timeline seeker cannot be used when paused.
 - fix issue where you can drag speakers even when mouse is over the UI
 - actually get the metadata off of the WAV files themselves, not a separate JSON
 - write an algo to separate the L/R channels from a single audio file.
